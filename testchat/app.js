@@ -23,11 +23,11 @@ var sub = redis.createClient();
 var test = redis.createClient();
 
 io.sockets.on('connection', function (client) {
-	sub_socre.subscribe("postscore");
+	/*sub_score.subscribe("postscore");
 	sub_score.on("score", function (channel, score) {
 		console.log("score received on server from publish ");
 		client.send(score);
-	});
+	});*/
 	
 	sub.subscribe("chatting");
 	sub.on("message", function (channel, message) {
