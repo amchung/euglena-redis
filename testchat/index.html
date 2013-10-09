@@ -40,8 +40,11 @@
 
 		socket.on('message', function(message){
 			content.append(message + '<br />');
+		});
+		
+		socket.on('postscore', function(score){
 			board.empty();
-			board.append(message);
+			board.append(score);
 		});
 
 		socket.on('disconnect', function() {

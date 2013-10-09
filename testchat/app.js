@@ -49,6 +49,7 @@ io.sockets.on('connection', function (client) {
 					return Math.floor(b/2);
 				});
 				console.log( _.toArray(lists) );
+				client.emit("postscore",  _.toArray(lists) );
 			});
 		}
 	});
