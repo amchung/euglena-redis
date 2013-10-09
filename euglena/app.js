@@ -6,7 +6,7 @@ var fs = require('fs');
 var _=require('underscore');
 
 function handler(req,res){
-	fs.readFile(__dirname + '/index.html', function(err,data){
+	/*fs.readFile(__dirname + '/index.html', function(err,data){
 		if(err){
 			res.writeHead(500);
 			return res.end('Error loading index.html');
@@ -14,7 +14,9 @@ function handler(req,res){
 		res.writeHead(200);
 		console.log("Listening on port 8088");
 		res.end(data);
-	});
+	});*/
+	res.writeHead(200);
+	res.end("Hello Socket");
 }
 
 var store = redis.createClient();
