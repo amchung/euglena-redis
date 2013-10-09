@@ -3,6 +3,7 @@ app.listen(8088);
 var io = require('socket.io').listen(app);
 var redis = require('redis');
 var fs = require('fs');
+var _=require('underscore');
 
 function handler(req,res){
 	fs.readFile(__dirname + '/index.html', function(err,data){
@@ -19,13 +20,21 @@ function handler(req,res){
 var store = redis.createClient();
 var pub = redis.createClient();
 var sub = redis.createClient();
+var test = redis.createClient();
 
 io.sockets.on('connection', function (client) {
+	sub_socre.subscribe("postscore");
+	sub_score.on("score", function (channel, score) {
+		console.log("score received on server from publish ");
+		client.send(score);
+	});
+	
 	sub.subscribe("chatting");
 	sub.on("message", function (channel, message) {
-		console.log("message recieved on server from publish ");
+		console.log("message received on server from publish ");
 		client.send(message);
 	});
+	
 	client.on("message", function (msg) {
 		console.log(msg);
 		if (msg.type == "chat"){
@@ -34,7 +43,13 @@ io.sockets.on('connection', function (client) {
 		else if(msg.type == "setUsername"){
 			pub.publish("chatting","A new user is connected:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
-			//pub.publish("chatting", store.lrange("onlineUsers",0,-1));
+			test.zadd("myset", msg.user.length , msg.user);
+			test.zrange("myset", 0 , -1, 'withscores', function(err,members){
+				var lists=_.groupBy(members,function(a,b){
+					return Math.floor(b/2);
+				});
+				console.log( _.toArray(lists) );
+			});
 		}
 	});
 	client.on('disconnect',function () {
