@@ -44,7 +44,8 @@
 		
 		socket.on('postscore', function(score){
 			board.empty();
-			board.append(score);
+			//board.append(score);
+			console.log(score);
 		});
 
 		socket.on('disconnect', function() {
