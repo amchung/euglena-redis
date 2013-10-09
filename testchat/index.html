@@ -2,6 +2,7 @@
 <head>
     <title>Socket and Redis in Node.js</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="underscore.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 </head>
 <body>
@@ -46,6 +47,9 @@
 			board.empty();
 			//board.append(score);
 			console.log(score);
+			for (var i=0;i<score.length;i++){
+				board.append(score[i][0]+':'+score[i][1]);
+			}
 		});
 
 		socket.on('disconnect', function() {
