@@ -159,6 +159,9 @@ function onReady(event) {
 	socket.on('postscore', function(score){
 		board.empty();
 		for (var i=0;i<score.length;i++){
+			if(i=0){
+				board.append('<p style="color: #FA6600">' + score[i][0]+'  :  '+score[i][1]+'</p><br />', 
+			}
 			board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
 		}
 		board.fadeOut('fast');
