@@ -56,7 +56,7 @@ function drawBox(box_X,box_Y,box_L,totalRes){
 	if (score_val>0){
 		obj_c.beginPath();
     	obj_c.fillStyle = "#fff"; 
-    	obj_c.fillText('score: +'+score,box_X - box_L/2, box_Y - box_L/2-10);
+    	obj_c.fillText('score: +'+score_val,box_X - box_L/2, box_Y - box_L/2-10);
     	
     	obj_c.moveTo(scoreX, scoreY);
     	obj_c.strokeStyle = "#fff";
@@ -84,9 +84,6 @@ function resetGame(){
 function countDown(){
 	int_timer = int_timer - 0.1;
 	if (int_timer > 0){
-		//score = score + (Math.pow(scoreX-ObjX,2) + Math.pow(scoreY-ObjY,2))*10;
-		//scoreX = ObjX;
-		//scoreY = ObjY;
 		score_val = (Math.pow(scoreX-ObjX,2) + Math.pow(scoreY-ObjY,2))*10;
 		gametimer=requestAnimFrame(countDown);
 	}else{
