@@ -53,7 +53,7 @@ function drawBox(box_X,box_Y,box_L,totalRes){
 	obj_c.arc(box_X,box_Y,box_L/4, 0, enda);
 	obj_c.fill();
 	
-	if (score>0){
+	if (score_val>0){
 		obj_c.beginPath();
     	obj_c.fillStyle = "#fff"; 
     	obj_c.fillText('score: +'+score,box_X - box_L/2, box_Y - box_L/2-10);
