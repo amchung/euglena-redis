@@ -69,16 +69,11 @@ io.sockets.on('connection', function (client) {
 		if(msg.type == "setUsername"){
 			pub.publish("chatting","A new user is connected:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
+			showList(4);
 		}
 		else if(msg.type == "sendscore"){
 			list.zadd("myset", msg.score , msg.user);
-			list.zrange("myset", 0 , -1, 'withscores', function(err,members){
-				var lists=_.groupBy(members,function(a,b){
-					return Math.floor(b/2);
-				});
-				console.log( _.toArray(lists) );
-				client.emit("postscore",  _.toArray(lists) );
-			});
+			showList(4);
 		}
 		else{
 			pub.publish("chatting", msg.message);	
@@ -90,4 +85,14 @@ io.sockets.on('connection', function (client) {
 	});
 });
 
+
+function showList(rank){
+	list.zrange("myset", 0 , rank, 'withscores', function(err,members){
+		var lists=_.groupBy(members,function(a,b){
+			return Math.floor(b/2);
+		});
+		console.log( _.toArray(lists) );
+		client.emit("postscore",  _.toArray(lists) );
+	});
+}
 

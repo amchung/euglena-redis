@@ -157,6 +157,7 @@ function onReady(event) {
 		
 	socket.on('postscore', function(score){
 		board.empty();
+		board.append('<b>TOP 5</b><br />');
 		for (var i=0;i<score.length;i++){
 			board.append(score[i][1]+'  :  '+score[i][0]+ '<br />');
 		}
