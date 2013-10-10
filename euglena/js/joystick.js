@@ -160,9 +160,10 @@ function onReady(event) {
 		board.empty();
 		for (var i=0;i<score.length;i++){
 			if(i=0){
-				board.append('<p style="color: #FA6600">' + score[i][0]+'  :  '+score[i][1]+'</p><br />', 
+				board.append('<p style="color: #FA6600">' + score[i][0]+'  :  '+score[i][1]+'</p><br />');
+			}else{
+				board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
 			}
-			board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
 		}
 		board.fadeOut('fast');
 		board.fadeIn('fast');
