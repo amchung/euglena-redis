@@ -169,8 +169,6 @@ function onReady(event) {
 		board.fadeIn('fast');
 		board.fadeOut('fast');
 		board.fadeIn('fast');
-		board.fadeOut('fast');
-		board.fadeIn('fast');
 	});
 
 	socket.on('disconnect', function() {
