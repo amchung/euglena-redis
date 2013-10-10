@@ -6,17 +6,7 @@ var fs = require('fs');
 var _ = require('underscore');
 var path = require('path');
 
-function handler(req,res){
-	/*fs.readFile(__dirname + '/index.html', function(err,data){
-		if(err){
-			res.writeHead(500);
-			return res.end('Error loading index.html');
-		}
-		res.writeHead(200);
-		console.log("Listening on port 8088");
-		res.end(data);
-	});*/
-	
+function handler(req,res){	
 	var filePath = '.' + req.url;
 	if (filePath == './'){
 		filePath = './index.html';
@@ -79,9 +69,7 @@ io.sockets.on('connection', function (client) {
 		if (msg.type == "chat"){
 			pub.publish("chatting", msg.message);
 		}
-		else if(msg.type == "setUsername"){
-			pub.publish("chatting","A new user is connected:" + msg.user);
-			store.sadd("onlineUsers", msg.user);
+		else if(msg.type == "postscore"){
 			list.zadd("myset", msg.user.length , msg.user);
 			list.zrange("myset", 0 , -1, 'withscores', function(err,members){
 				var lists=_.groupBy(members,function(a,b){
@@ -90,6 +78,10 @@ io.sockets.on('connection', function (client) {
 				console.log( _.toArray(lists) );
 				client.emit("postscore",  _.toArray(lists) );
 			});
+		}
+		else{
+			pub.publish("chatting","A new user is connected:" + msg.user);
+			store.sadd("onlineUsers", msg.user);			
 		}
 	});
 	client.on('disconnect',function () {
