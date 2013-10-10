@@ -15,8 +15,18 @@ function handler(req,res){
 		console.log("Listening on port 8088");
 		res.end(data);
 	});*/
-	res.writeHead(200);
-	res.end("Hello Socket");
+	
+    fs.realpath('./index.html', function(err, resolvedPath) {
+        fs.readFile(resolvedPath, function(err, data) { 
+        	if(err){
+				res.writeHead(500);
+				return res.end('Error loading index.html');
+			}
+			res.writeHead(200);
+            html = data;
+            res.end(html);
+        })
+    });
 }
 
 var store = redis.createClient();
