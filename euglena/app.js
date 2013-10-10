@@ -31,6 +31,9 @@ function handler(req,res){
 		case '.css':
 			contentType = 'text/css';
 			break;
+		case '.png':
+			contentType = 'image/png';
+			break;
 	}
 	fs.exists(filePath, function(exists){
 		if (exists) {
