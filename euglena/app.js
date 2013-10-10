@@ -4,6 +4,7 @@ var io = require('socket.io').listen(app);
 var redis = require('redis');
 var fs = require('fs');
 var _=require('underscore');
+var path = require('path');
 
 function handler(req,res){
 	/*fs.readFile(__dirname + '/index.html', function(err,data){
