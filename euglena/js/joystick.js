@@ -91,6 +91,8 @@ function init() {
     setupObjCanvas();
     setupMotionDetection();
     
+    touches = new Collection();
+    
     control_canvas.addEventListener('pointerdown', onPointerDown, false);
     control_canvas.addEventListener('pointermove', onPointerMove, false);
     control_canvas.addEventListener('pointerup', onPointerUp, false);
@@ -115,8 +117,6 @@ function onReady(event) {
 	led2 = arduino.getDigitalPin(6);
 	led3 = arduino.getDigitalPin(9);
 	led4 = arduino.getDigitalPin(10);
-	
-	touches = new Collection();
 	    
 	// jQuery part for the button
     $("#slider").slider({
