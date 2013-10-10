@@ -40,19 +40,21 @@
 				<canvas id="objCanvas" style="z-index: 2; position:absolute"></canvas>
 			</div>
 		</div>
-		<div id="controlArea" style = "width:240px; padding: 10px; position:absolute; left: 700px">
-			<div align="center">
+		<div id="controlArea" style = "width:280px; padding: 10px; position:absolute; left: 700px">
+			<div align="center" style = "margin: 10px;">
 				<h5>TOP 5 SCORES</h5>
 				<div id="board"></div>
 			</div>
-			<div>
-				<h5>LED control</h5>
+			<div align="center" style="background:#000; padding: 6px; margin: 10px;">
+				<div>
+					<h5 style="color: #FA6600;">LED control</h5>
+				</div>
+				<div style = "padding: 6px; margin: 2px">
+					<canvas id="controlCanvas" style="z-index: 3"></canvas>
+				</div>
 			</div>
-			<div style = "background:#000; padding: 8px; margin: 2px">
-				<canvas id="controlCanvas" style="z-index: 3"></canvas>
-			</div>
-			<div id="username">
-				<p>What's your name?</p>
+			<div id="username" style="padding: 4px;">
+				<h6>What's your name?</h6>
 				<input type="text" name="usernameTxt" />
 				<input type="button" name="setUsername" value="Enter the Ring" />
 			</div>
@@ -60,11 +62,11 @@
 				<input type="text" name="chatTxt" />
 				<input type="button" name="sendBtn" value="Send" />
 			</div>
-			<div id="chat"></div>
-			<div>
+			<div id="chat" style="padding: 6px;"></div>
+			<div style="background:#000;padding: 10px;">
 				<h6>Use the slider to set the random motion radius</h6>
-            	<p id="slider"></p>
-            	<small id="value"></small>
+            	<h6 id="slider"></h6>
+            	<h6 id="value"></h6>
 			</div>
 	    </div>
 	    <div id="mdArea" style = "width:640px; padding: 10px;position:absolute; left: 0px;visibility:hidden;">

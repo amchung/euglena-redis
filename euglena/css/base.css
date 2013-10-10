@@ -51,9 +51,9 @@
 /* #Basic Styles
 ================================================== */
 	body {
-		background: #000;
+		background: #111;
 		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: #777;
+		color: #666;
 		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 		-webkit-text-size-adjust: 100%;
  }
@@ -63,7 +63,7 @@
 ================================================== */
 	h1, h2, h3, h4, h5, h6 {
 		/*color: #181818;*/
-		color: #AAA;
+		color: #888;
 		font-family: "Verdana", "Trebuchet MS", sans-serif;
 		font-weight: normal; }
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
@@ -72,7 +72,7 @@
 	h3 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
 	h4 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
 	h5 { font-size: 17px; line-height: 24px; }
-	h6 { font-size: 10px; line-height: 21px; }
+	h6 { font-size: 11px; line-height: 21px; }
 	.subheader { color: #777; }
 
 	p { margin: 0 0 20px 0; }
