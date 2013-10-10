@@ -3,7 +3,8 @@ app.listen(8088);
 var io = require('socket.io').listen(app);
 var redis = require('redis');
 var fs = require('fs');
-var _=require('underscore');
+var _ = require('underscore');
+var path = require('path');
 
 function handler(req,res){
 	/*fs.readFile(__dirname + '/index.html', function(err,data){
@@ -21,7 +22,7 @@ function handler(req,res){
 		filePath = './index.html';
 		}
 		
-	var extname = fs.extname(filePath);
+	var extname = path.extname(filePath);
 	var contentType = 'text/html';
 	switch (extname) {
 		case '.js':
