@@ -69,11 +69,11 @@ io.sockets.on('connection', function (client) {
 		if(msg.type == "setUsername"){
 			pub.publish("chatting","A new user is connected:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
-			showList(4);
+			client.emit("postscore",  showList(4));
 		}
 		else if(msg.type == "sendscore"){
 			list.zadd("myset", msg.score , msg.user);
-			showList(4);
+			client.emit("postscore",  showList(4) );
 		}
 		else{
 			pub.publish("chatting", msg.message);	
@@ -92,7 +92,7 @@ function showList(rank){
 			return Math.floor(b/2);
 		});
 		console.log( _.toArray(lists) );
-		client.emit("postscore",  _.toArray(lists) );
+		return _.toArray(lists);
 	});
 }
 
