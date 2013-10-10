@@ -4,7 +4,6 @@ var io = require('socket.io').listen(app);
 var redis = require('redis');
 var fs = require('fs');
 var _=require('underscore');
-var path = require('path');
 
 function handler(req,res){
 	/*fs.readFile(__dirname + '/index.html', function(err,data){
@@ -22,7 +21,7 @@ function handler(req,res){
 		filePath = './index.html';
 		}
 		
-	var extname = path.extname(filePath);
+	var extname = fs.extname(filePath);
 	var contentType = 'text/html';
 	switch (extname) {
 		case '.js':
@@ -32,7 +31,7 @@ function handler(req,res){
 			contentType = 'text/css';
 			break;
 	}
-	path.exists(filePath, function(exists){
+	fs.exists(filePath, function(exists){
 		if (exists) {
 			fs.readFile(filePath, function(err, data){
 				if(err){
