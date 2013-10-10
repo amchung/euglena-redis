@@ -79,6 +79,7 @@ var arduino = new IOBoard(host, 8887);
 ///////////////////////////// ARDUINO SETUP END
 
 var username = "noname";
+var socket;
 
 document.addEventListener("DOMContentLoaded", init);
 	
@@ -142,7 +143,7 @@ function onReady(event) {
 			});
 	});
 	
-	var socket = new io.connect('http://171.65.102.132');
+	socket = new io.connect('http://171.65.102.132');
 	var chat = $('#chat');
 	var board = $('#board');
 
