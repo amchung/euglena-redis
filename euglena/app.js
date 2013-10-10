@@ -41,6 +41,7 @@ function handler(req,res){
 				}
 				else{
 					res.writeHead(200, {'Content-Type': contentType});
+					console.log("Listening on port 8088");
 					res.end(data, 'utf-8');
 				}
 			});
@@ -55,7 +56,7 @@ function handler(req,res){
 var store = redis.createClient();
 var pub = redis.createClient();
 var sub = redis.createClient();
-var test = redis.createClient();
+var list = redis.createClient();
 
 io.sockets.on('connection', function (client) {
 	/*sub_score.subscribe("postscore");
@@ -78,8 +79,8 @@ io.sockets.on('connection', function (client) {
 		else if(msg.type == "setUsername"){
 			pub.publish("chatting","A new user is connected:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
-			test.zadd("myset", msg.user.length , msg.user);
-			test.zrange("myset", 0 , -1, 'withscores', function(err,members){
+			list.zadd("myset", msg.user.length , msg.user);
+			list.zrange("myset", 0 , -1, 'withscores', function(err,members){
 				var lists=_.groupBy(members,function(a,b){
 					return Math.floor(b/2);
 				});
