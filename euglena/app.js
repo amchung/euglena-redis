@@ -16,17 +16,39 @@ function handler(req,res){
 		res.end(data);
 	});*/
 	
-    fs.realpath('./index.html', function(err, resolvedPath) {
-        fs.readFile(resolvedPath, function(err, data) { 
-        	if(err){
-				res.writeHead(500);
-				return res.end('Error loading index.html');
-			}
-			res.writeHead(200);
-            html = data;
-            res.end(html);
-        })
-    });
+	var filePath = '.' + req.url;
+	if (filePath == './'){
+		filePath = './index.html';
+		}
+		
+	var extname = path.extname(filePath);
+	var contentType = 'text/html';
+	switch (extname) {
+		case '.js':
+			contentType = 'text/javascript';
+			break;
+		case '.css':
+			contentType = 'text/css';
+			break;
+	}
+	path.exists(filePath, function(exists){
+		if (exists) {
+			fs.readFile(filePath, function(err, data){
+				if(err){
+					res.writeHead(500);
+					return res.end('Error loading files');
+				}
+				else{
+					res.writeHead(200, {'Content-Type': contentType});
+					res.end(data, 'utf-8');
+				}
+			});
+		}
+		else {
+			res.writeHead(404);
+			res.end();
+		}
+	});
 }
 
 var store = redis.createClient();
