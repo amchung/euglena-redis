@@ -161,6 +161,12 @@ function onReady(event) {
 		for (var i=0;i<score.length;i++){
 			board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
 		}
+		board.fadeOut('slow');
+		board.fadeIn('slow');
+		board.fadeOut('slow');
+		board.fadeIn('slow');
+		board.fadeOut('slow');
+		board.fadeIn('slow');
 	});
 
 	socket.on('disconnect', function() {
