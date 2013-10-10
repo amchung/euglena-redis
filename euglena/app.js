@@ -64,22 +64,23 @@ io.sockets.on('connection', function (client) {
 		client.send(message);
 	});
 	
+	list.zrevrange("myset", 0 , 4, 'withscores', function(err,members){
+		var lists=_.groupBy(members,function(a,b){
+			return Math.floor(b/2);
+		});
+		console.log( _.toArray(lists) );
+		client.emit("postscore",  _.toArray(lists) );
+	});
+	
 	client.on("message", function (msg) {
 		console.log(msg);
 		if(msg.type == "setUsername"){
 			pub.publish("chatting","A new user is connected:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
-			list.zrange("myset", 0 , 4, 'withscores', function(err,members){
-				var lists=_.groupBy(members,function(a,b){
-					return Math.floor(b/2);
-				});
-				console.log( _.toArray(lists) );
-				client.emit("postscore",  _.toArray(lists) );
-			});
 		}
 		else if(msg.type == "sendscore"){
 			list.zadd("myset", msg.score , msg.user);
-			list.zrange("myset", 0 , 4, 'withscores', function(err,members){
+			list.zrevrange("myset", 0 , 4, 'withscores', function(err,members){
 				var lists=_.groupBy(members,function(a,b){
 					return Math.floor(b/2);
 				});
