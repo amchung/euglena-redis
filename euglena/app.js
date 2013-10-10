@@ -75,7 +75,7 @@ io.sockets.on('connection', function (client) {
 	client.on("message", function (msg) {
 		console.log(msg);
 		if(msg.type == "setUsername"){
-			pub.publish("chatting","A new user is connected:" + msg.user);
+			pub.publish("chatting","A New Challenger Enters the Ring:" + msg.user);
 			store.sadd("onlineUsers", msg.user);
 		}
 		else if(msg.type == "sendscore"){
@@ -94,7 +94,7 @@ io.sockets.on('connection', function (client) {
 	});
 	client.on('disconnect',function () {
 		sub.quit();
-		pub.publish("chatting","User is disconnected :" + client.id);
+		pub.publish("chatting","Disconnected :" + client.id);
 	});
 });
 

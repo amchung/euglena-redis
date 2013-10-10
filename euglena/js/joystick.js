@@ -149,6 +149,7 @@ function onReady(event) {
 
 	socket.on('connect', function() {
 		console.log("Connected");
+		chat.html("<b>Connected!</b>");
 	});
 
 	socket.on('message', function(message){
@@ -157,7 +158,7 @@ function onReady(event) {
 		
 	socket.on('postscore', function(score){
 		board.empty();
-		board.append('<b>TOP 5</b><br />');
+		board.html("<b>TOP 5</b><br />");
 		for (var i=0;i<score.length;i++){
 			board.append(score[i][1]+'  :  '+score[i][0]+ '<br />');
 		}
