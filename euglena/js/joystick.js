@@ -159,7 +159,7 @@ function onReady(event) {
 	socket.on('postscore', function(score){
 		board.empty();
 		for (var i=0;i<score.length;i++){
-			board.append(score[i][1]+'  :  '+score[i][0]+ '<br />');
+			board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
 		}
 	});
 
