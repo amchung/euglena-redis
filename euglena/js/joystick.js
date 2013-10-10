@@ -133,7 +133,6 @@ function onReady(event) {
 	$('input[name=setUsername]').click(function(){
 			if($('input[name=usernameTxt]').val() != ""){
 				username = $('input[name=usernameTxt]').val();
-				console.log(username);
 				var msg = {type:'setUsername', user:username};
 				socket.json.send(msg);
 			}
@@ -157,10 +156,8 @@ function onReady(event) {
 		
 	socket.on('postscore', function(score){
 		board.empty();
-		//board.append(score);
-		console.log(score);
 		for (var i=0;i<score.length;i++){
-			board.append(score[i][0]+'  :  '+score[i][1]+ '<br />');
+			board.append(score[i][1]+'  :  '+score[i][0]+ '<br />');
 		}
 	});
 

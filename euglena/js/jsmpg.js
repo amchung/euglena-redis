@@ -55,7 +55,7 @@ var jsmpeg = window.jsmpeg = function( url, opts ) {
 
 jsmpeg.prototype.waitForIntraFrame = true;
 //jsmpeg.prototype.socketBufferSize = 512 * 1024; // 512kb each
-jsmpeg.prototype.socketBufferSize = 32 * 1024; // 512kb each
+jsmpeg.prototype.socketBufferSize = 16 * 1024; // 512kb each
 jsmpeg.prototype.onlostconnection = null;
 
 jsmpeg.prototype.initSocketClient = function( client ) {

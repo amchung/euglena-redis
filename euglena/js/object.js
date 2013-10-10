@@ -16,7 +16,7 @@ var max_timer=30;
 
 var scoreX = 0;
 var scoreY = 0;
-var score = 0;
+var score_val = 0;
 var gametimer;
 
 function setupVidCanvas() {
@@ -72,7 +72,7 @@ function resetGame(){
 	ObjX = obj_canvas.width/2;
 	ObjY = obj_canvas.height/2;
 	
-	score = 0;
+	score_val = 0;
 	scoreX = ObjX;
 	scoreY = ObjY;
 	
@@ -87,13 +87,16 @@ function countDown(){
 		//score = score + (Math.pow(scoreX-ObjX,2) + Math.pow(scoreY-ObjY,2))*10;
 		//scoreX = ObjX;
 		//scoreY = ObjY;
-		score = (Math.pow(scoreX-ObjX,2) + Math.pow(scoreY-ObjY,2))*10;
+		score_val = (Math.pow(scoreX-ObjX,2) + Math.pow(scoreY-ObjY,2))*10;
 		gametimer=requestAnimFrame(countDown);
 	}else{
 		window.clearTimeout(gametimer);
 		
+		var msg = {type:'sendscore', user:username, score:score_val};
+		socket.json.send(msg);
+		
 		int_timer=0;
-		score = 0;
+		score_val = 0;
 		ObjX = obj_canvas.width/2;
 		ObjY = obj_canvas.height/2;
 	}
