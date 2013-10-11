@@ -248,7 +248,6 @@ function compareFrame(img1) {
   }
   // copy reference of img1 to img2
   img2 = img1;
-  img2.onload = null;
 }
 
 
