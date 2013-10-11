@@ -71,7 +71,7 @@ function compare(image1, image2, ptX, ptY, threshold, ObjR) {
   With every new picture a compare() is performed.
   The new picture is 'img1', the previous picture is stored in 'img2'.
 */
-function newPictureComplete() {
+function compareFrame() {
   // just compare if there are two pictures
   if ( img2 != null ) {
     var res;
@@ -111,18 +111,7 @@ function newPictureComplete() {
 
   // copy reference of img1 to img2
   img2 = img1;
-  img2.onload = null;
-  // load a new picture into img1
-  img1 = new Image();
-  //img1.onload=newPictureComplete;
-  img1.onload=requestAnimFrame(newPictureComplete);
-
-  // load next picture in a few milliseconds
-  // the server blocks anyway until a fresh picture has arrived, so it can never be faster
-  // than the framerate. This timeout is intended to have the option
-  // to lower the required processing power at client side.
-  //window.setTimeout("img1.src=video_canvas.toDataURL('image/png');", 333);
-  img1.src=video_canvas.toDataURL('image/png');
+  //img2.onload = null;
 }
 
 
@@ -141,12 +130,6 @@ function setupMotionDetection() {
   test_canvas = document.getElementById('testCanvas');
   md_canvas.width = vid_width;
   md_canvas.height = vid_height;
-}
-
-function runMotionDetection(){
-  img1 = new Image();
-  img1.onload=requestAnimFrame(newPictureComplete);
-  img1.src = video_canvas.toDataURL("image/png");
 }
 
 /*</script>

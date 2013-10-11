@@ -37,13 +37,17 @@ function setupVidCanvas() {
 	video_canvas.height = vid_height;
 	
 	getMjpeg();
-	runMotionDetection();
 }
 
 function getMjpeg(){
     var img = new Image();
 	img.onload = function() {
     	video_c.drawImage(img, 0, 0, vid_width, vid_height);
+    	
+    	// motion detection
+    	img1 = img;
+    	compareFrame();
+    	// load frame
     	requestAnimFrame(getMjpeg);
 		};
 	img.src = "http://171.65.102.132:8080/?action=snapshot?t=" + new Date().getTime();
