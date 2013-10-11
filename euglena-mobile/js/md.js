@@ -15,16 +15,15 @@ var md_canvas = null;
   compare two images and count the differences
 
   input.: image1 and image2 are Image() objects
-  input.: canvas is a Canvas() object to draw with
   input.: threshold specifies by how much the color value of a pixel
           must differ before they are regarded to be different
 
   return: number of different pixels
 */
+
 function compare(image1, image2, ptX, ptY, threshold, ObjR) {
   var movement = new Array(0,0,0,0);
   var md_ctx = md_canvas.getContext("2d");
-  //var test_ctx = test_canvas.getContext("2d");
   var width = md_canvas.width/2, height = md_canvas.height/2;
 
   // copy images into canvas element
@@ -35,6 +34,7 @@ function compare(image1, image2, ptX, ptY, threshold, ObjR) {
   // this makes r,g,b,alpha data of images available
   var pixels1 = md_ctx.getImageData(0, 0, width, height);
   var pixels2 = md_ctx.getImageData(width, 0, width, height);
+  
   // substract picture1 from picture2
   // if they differ set color value to max,
   // if the difference is below threshold set difference to 0.
@@ -58,10 +58,6 @@ function compare(image1, image2, ptX, ptY, threshold, ObjR) {
       movement[n+m] += Math.min(1, ch0 + ch1 + ch2);
     }
   }
-  
-  //test_ctx.clearRect(0, 0, md_canvas.width, md_canvas.height);
-  //md_ctx.putImageData(pixels_diff, 0, 240);
-
   return movement;
 }
 
@@ -85,20 +81,15 @@ function compareFrame() {
       // errors can happen if the pictures were corrupted during transfer
       // instead of giving up, just proceed
     }
-
-    // show to the user if we regards this as motion
-    // decide for a color depending on movement (more then N pixels)
-    // draw into free area of canvas
-    // (hardcoded positions for better performance)
+    
     var md_ctx = md_canvas.getContext("2d");
-   // md_ctx.fillStyle = ( res > 5 ) ? "rgb(200,0,0)" : "rgb(0,200,0)";
-    //md_ctx.fillRect (0, 50, 25, 50); md_ctx.fillRect (75, 50, 25, 50);
     if ((res[0]>400)||(res[1]>400)||(res[2]>400)||(res[3]>400)){
     	res[0]=0;res[1]=0;res[2]=0;res[3]=0;
     }
     
     var objx=ObjX+(res[0]+res[2]-res[1]-res[3])/4+(Math.random()-0.5)*20*brown_const;
     var objy=ObjY+(res[0]+res[1]-res[2]-res[3])/4+(Math.random()-0.5)*20*brown_const;
+    
     ObjX=Math.max(objx,ObjR);
     ObjX=Math.min(ObjX,vid_width-ObjR);
     ObjX=Math.round(ObjX/2)*2;
@@ -107,11 +98,12 @@ function compareFrame() {
     ObjY=Math.round(ObjY/2)*2;
 
     drawBox(ObjX,ObjY,ObjL,res[0]+res[1]+res[2]+res[3]);
+  }else{
+  	console.log('motion detection module started');
   }
 
   // copy reference of img1 to img2
   img2 = img1;
-  img2.onload = null;
 }
 
 

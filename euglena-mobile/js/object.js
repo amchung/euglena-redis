@@ -43,10 +43,9 @@ function getMjpeg(){
     var img = new Image();
 	img.onload = function() {
     	video_c.drawImage(img, 0, 0, vid_width, vid_height);
-    	
     	// motion detection
     	img1 = img;
-    	//compareFrame();
+    	compareFrame();
     	// load frame
     	requestAnimFrame(getMjpeg);
 	};
