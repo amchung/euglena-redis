@@ -46,10 +46,10 @@ function getMjpeg(){
     	
     	// motion detection
     	img1 = img;
-    	compareFrame();
+    	//compareFrame();
     	// load frame
     	requestAnimFrame(getMjpeg);
-		};
+	};
 	img.src = "http://171.65.102.132:8080/?action=snapshot?t=" + new Date().getTime();
 }
 
