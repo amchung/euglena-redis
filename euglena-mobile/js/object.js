@@ -36,12 +36,6 @@ function setupVidCanvas() {
 	video_canvas.width = vid_width;
 	video_canvas.height = vid_height;
 	
-	obj_canvas.width = vid_width;
-	obj_canvas.height = vid_height;
-		
-	ObjX = vid_width/2;
-	ObjY = vid_height/2;
-	
 	getMjpeg();
 	runMotionDetection();
 }
@@ -78,6 +72,12 @@ function getMjpeg(){
 function setupObjCanvas() {
     obj_canvas = document.getElementById('objCanvas');  
     obj_c = obj_canvas.getContext('2d');
+    obj_canvas.width = vid_width;
+	obj_canvas.height = vid_height;
+		
+	ObjX = vid_width/2;
+	ObjY = vid_height/2;
+    
     drawBox(ObjX,ObjY,ObjL);
 }
 
