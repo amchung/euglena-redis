@@ -101,7 +101,7 @@ function compareFrame() {
   }
   // copy reference of img1 to img2
   img2 = img1;
-  img2.onload = console.log('img1 copied into img2');
+  img2.onload = null;
 }
 
 

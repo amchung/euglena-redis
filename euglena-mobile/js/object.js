@@ -42,7 +42,7 @@ function getMjpeg(){
 	img.onload = function() {
     	video_c.drawImage(img, 0, 0, vid_width, vid_height);
     	// motion detection
-    	img1 = img;
+    	img1.src=video_canvas.toDataURL('image/png');
     	compareFrame();
     	// load frame
     	requestAnimFrame(getMjpeg);
