@@ -43,7 +43,7 @@ function setupVidCanvas() {
 function getMjpeg(){
     var img = new Image();
 	img.onload = function() {
-    	video_c.drawImage(img);
+    	video_c.drawImage(img, 0, 0, vid_width, vid_height);
     	requestAnimFrame(getMjpeg);
 		};
 	img.src = "http://171.65.102.132:8080/?action=snapshot?t=" + new Date().getTime();
