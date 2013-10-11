@@ -98,12 +98,10 @@ function compareFrame() {
     ObjY=Math.round(ObjY/2)*2;
 
     drawBox(ObjX,ObjY,ObjL,res[0]+res[1]+res[2]+res[3]);
-  }else{
-  	console.log('motion detection module started');
   }
-
   // copy reference of img1 to img2
   img2 = img1;
+  img2.onload = console.log('img1 copied into img2');
 }
 
 

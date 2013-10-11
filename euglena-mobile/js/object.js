@@ -3,8 +3,6 @@ obj_c,
 ObjX,
 ObjY,
 ObjL=80,
-img1 = null,
-img2 = null,
 cp_canvas = null;
 
 var video_canvas,
