@@ -74,22 +74,28 @@ io.sockets.on('connection', function (client) {
 	
 	client.on("message", function (msg) {
 		console.log(msg);
-		if(msg.type == "setUsername"){
-			pub.publish("chatting","A New Challenger Enters the Ring:" + msg.user);
-			store.sadd("onlineUsers", msg.user);
-		}
-		else if(msg.type == "sendscore"){
-			list.zadd("myset", msg.score , msg.user);
-			list.zrevrange("myset", 0 , 4, 'withscores', function(err,members){
-				var lists=_.groupBy(members,function(a,b){
-					return Math.floor(b/2);
+		
+		switch(msg.type)
+		{
+			case "setUsername":
+  				pub.publish("chatting", "A New Challenger Enters the Ring:" + msg.user);
+				store.sadd("onlineUsers", msg.user);
+  			break;
+			case "sendscore":
+  				list.zadd("myset", msg.score , msg.user);
+				list.zrevrange("myset", 0 , 4, 'withscores', function(err,members){
+					var lists=_.groupBy(members,function(a,b){
+						return Math.floor(b/2);
+					});
+					console.log( _.toArray(lists) );
+					client.emit("postscore",  _.toArray(lists) );
 				});
-				console.log( _.toArray(lists) );
-				client.emit("postscore",  _.toArray(lists) );
-			});
-		}
-		else{
-			pub.publish("chatting", msg.message);	
+  			break;
+  			case "chat":
+  				pub.publish("chatting", msg.message);	
+  			break;
+			default:
+  				console.log("!!!received unknown input msg!!!");
 		}
 	});
 	client.on('disconnect',function () {
@@ -97,15 +103,3 @@ io.sockets.on('connection', function (client) {
 		pub.publish("chatting","Disconnected :" + client.id);
 	});
 });
-
-
-function showList(){
-	list.zrange("myset", 0 , -1, 'withscores', function(err,members){
-		var lists=_.groupBy(members,function(a,b){
-			return Math.floor(b/2);
-		});
-		console.log( _.toArray(lists) );
-		client.emit("postscore",  _.toArray(lists) );
-	});
-}
-
